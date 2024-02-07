@@ -1,17 +1,16 @@
 package main
 
 import (
-	// "fmt"
 	"context"
 	"os"
+	"test-go-app/templates"
 	"github.com/labstack/echo/v4"
-	
 )
 
 func main() {
 	e := echo.New()
 	// Main new
-	component := hello("Dan")
+	component := templates.Hello("Dan")
 	component.Render(context.Background(), os.Stdout)
 	e.GET("/", func(c echo.Context) error {
 		return component.Render(context.Background(), c.Response().Writer)
