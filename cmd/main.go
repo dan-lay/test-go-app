@@ -12,10 +12,8 @@ type DB struct{}
 func main() {
 	app := echo.New()
 
-	var db DB
-
-	userHandler := handler.UserHandler{db}
-
+	userHandler := handler.UserHandler{}
+	app.GET("/user", userHandler.HandleUserShow)
 	app.Start(":3000")
 
 	fmt.Println("hello it's working")
