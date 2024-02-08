@@ -1,0 +1,26 @@
+package user
+
+import "github.com/dan-lay/test-go-app/view/layout"
+import "github.com/dan-lay/test-go-app/model"
+import "github.com/dan-lay/test-go-app/view/component"
+
+func getAuthenticatedUser(c context.Context) string {
+    user, ok := c.Value("user").(string)
+    if !ok {
+        return ""
+    }
+    return user
+}
+
+templ Show(user model.User) {
+    <h1>{getAuthenticatedUser(ctx)}</h1>
+    @layout.Base() {
+        <h1>
+            hello {user.Email} what's up you duck
+        </h1>
+        @component.Input(component.InputProps{
+            InputType: "email",
+            Name: "User Email",
+        })
+    }
+}
